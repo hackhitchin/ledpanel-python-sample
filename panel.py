@@ -8,22 +8,21 @@ import _thread
 from array import array
 
 # GPIO pins for panel
-# The pins below match the panel in the Hackspace window which displays
-# the outdoor temperature
+# The pins below match the driver board built by Luis
 #
 # Change them as needed for your panel
 
-clk=Pin(19,Pin.OUT)
+clk=Pin(12,Pin.OUT)
 
-oe=Pin(27,Pin.OUT)
-lat=Pin(28,Pin.OUT)
+oe=Pin(11,Pin.OUT)
+lat=Pin(10,Pin.OUT)
 
 # D2 needs to be immediately after D1, or the PIO won't work
-d1=Pin(14,Pin.OUT)
-d2=Pin(15,Pin.OUT)
+d1=Pin(0,Pin.OUT)
+d2=Pin(1,Pin.OUT)
 
-a0=Pin(20,Pin.OUT)
-a1=Pin(21,Pin.OUT)                                                                    
+a0=Pin(8,Pin.OUT)
+a1=Pin(9,Pin.OUT)
 
 # Three arrays of 64*16 pixels as bits, divided into bytes
 # 64*16/8 = 128
@@ -289,10 +288,10 @@ def write(buffer, x, y, font, text):
 
 
 def main():
-    # If GPIO 26 is connected to GND (there's a button on the back of the
+    # If GPIO 15 is connected to GND (there's a button on the back of the
     # Hackspace panel), stop now before starting up any loops, second cores
     # etc.
-    stop = Pin(26, Pin.IN, Pin.PULL_UP)
+    stop = Pin(15, Pin.IN, Pin.PULL_UP)
 
     if stop.value()==0:
         exit(0)
